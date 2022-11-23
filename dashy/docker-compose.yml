@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  dashy:
+    container_name: dashy
+    image: lissy93/dashy
+    # Keep container port as 80
+    ports:
+      - 9696:80
+    volumes:
+       - /path/to/my-config.yml:/app/public/conf.yml
+       - /path/to/item-icons:/app/public/item-icons
+    environment:
+      - NODE_ENV=production    
+      - UID=1000
+      - GID=1000
+    restart: unless-stopped
+    networks:
+      - reverseproxy-nw
+    healthcheck:
+      test: ['CMD', 'node', '/app/services/healthcheck']
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  reverseproxy-nw:
+    external: true

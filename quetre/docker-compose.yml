@@ -1,0 +1,12 @@
+version: "3"
+services:
+
+  quetre:
+    container_name: quetre
+    image: quay.io/pussthecatorg/quetre:latest
+    restart: unless-stopped
+    ports:
+      - "4567:4567" # Comment once Reverse Proxy Setup
+    environment:
+      - "NODE_ENV=production"
+      - "PORT=4567"

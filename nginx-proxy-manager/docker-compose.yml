@@ -1,0 +1,17 @@
+version: '3'
+services:
+  npm-app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    networks:
+      - reverseproxy-nw
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - /home/npm/data:/data
+      - /home/npm/letsencrypt:/etc/letsencrypt
+networks:
+  reverseproxy-nw:
+    external: true

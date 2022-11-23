@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  portainer:
+    container_name: portainer
+    image: "portainer/portainer-ce"
+    networks:
+      - reverseproxy-nw
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+    restart: always
+    volumes:
+      - "/home/portainer:/data"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+networks:
+   reverseproxy-nw:
+     external: true
+
